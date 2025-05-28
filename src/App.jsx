@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Dialog from './components/Dialog/Dialog';
+// import SachinDialogModal from 'sachin-dialog-modal';
 import './App.css';
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
     <div className="app-container">
       <header className="hero-section">
         <h1>IceWarp Dialog Task</h1>
+        {/* <SachinDialogModal /> */}
         <p>
           This task demonstrates the implementation of a modular Dialog Window component in React.
           It is built using Vite and follows a Lego-style architecture with reusable subcomponents.

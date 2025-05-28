@@ -36,5 +36,8 @@
     "ui"
   ],
   "author": "Sachin",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "sachin-dialog-modal": "^0.0.3"
+  }
 }
