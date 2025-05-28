@@ -1,6 +1,6 @@
 {
   "name": "sachin-dialog-modal",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Reusable React dialog modal component built with Vite",
   "type": "module",
   "main": "dist/sachin-dialog-modal.umd.js",
