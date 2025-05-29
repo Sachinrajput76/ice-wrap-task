@@ -1,12 +1,12 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
 
 export default defineConfig({
+  base: '/ice-wrap-task/', // ← required for GitHub Pages deployment
   plugins: [react()],
   build: {
     lib: {
-      entry: "./src/index.jsx", // or your entry file
+      entry: "./src/index.jsx",
       name: 'SachinDialogModal',
       fileName: (format) => `sachin-dialog-modal.${format}.js`,
     },
@@ -19,8 +19,8 @@ export default defineConfig({
         }
       }
     }
-  }, optimizeDeps: {
+  },
+  optimizeDeps: {
     include: ['sachin-dialog-modal']
   }
-})
-
+});
