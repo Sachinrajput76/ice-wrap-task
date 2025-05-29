@@ -38,6 +38,6 @@
   "author": "Sachin",
   "license": "MIT",
   "dependencies": {
-    "sachin-dialog-modal": "^0.0.5"
+    "sachin-dialog-modal": "^0.0.6"
   }
 }
