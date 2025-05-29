@@ -6,9 +6,9 @@ export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/index.jsx'),
+      entry: "./src/index.jsx", // or your entry file
       name: 'SachinDialogModal',
-      fileName: 'sachin-dialog-modal'
+      fileName: (format) => `sachin-dialog-modal.${format}.js`,
     },
     rollupOptions: {
       external: ['react', 'react-dom'],
@@ -19,5 +19,8 @@ export default defineConfig({
         }
       }
     }
+  }, optimizeDeps: {
+    include: ['sachin-dialog-modal']
   }
-});
+})
+
