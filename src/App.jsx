@@ -1,69 +1,93 @@
 import React, { useState } from 'react';
-import Dialog from './components/Dialog/Dialog';
-import SachinDialog from 'sachin-dialog-modal';
+import CustomDialogModal from './components/Dialog/Dialog';
+import ExternalDialogModal from 'sachin-dialog-modal'; // Make sure sachin-dialog-modal exports a default component
 import './App.css';
 
 function App() {
-  const [showDialog, setShowDialog] = useState(false);
-  const [sachinDialog, setSachinDialog] = useState(false);
+  const [showCustomDialog, setShowCustomDialog] = useState(false);
+  const [showExternalDialog, setShowExternalDialog] = useState(false);
 
-  const dialogProps2 = {
-    header: {
-      icon: '📢',
-      title: 'System Alert from sachin dialog modal',
-      buttons: [
-        { label: 'Help', onClick: () => alert('Help Clicked') },
-        { label: 'Info', onClick: () => alert('Info Clicked') },
-        { label: 'Close', onClick: () => setSachinDialog(false) },
-      ],
-    },
-    content: <p>This dialog contains your message or interactive content.</p>,
-    footer: {
-      buttons: [
-        { label: 'Cancel', onClick: () => setSachinDialog(false) },
-        { label: 'Save', onClick: () => alert('Saved!') }
-      ],
-      info: 'Please review your input before saving.'
-    }
-  };
-  const dialogProps = {
-    header: {
+  const customDialogProps = {
+    headerProps: {
       icon: '📢',
       title: 'System Alert',
       buttons: [
         { label: 'Help', onClick: () => alert('Help Clicked') },
         { label: 'Info', onClick: () => alert('Info Clicked') },
-        { label: 'Close', onClick: () => setShowDialog(false) },
+        { label: 'Close', onClick: () => setShowCustomDialog(false) },
       ],
     },
-    content: <p>This dialog contains your message or interactive content.</p>,
-    footer: {
+    contentProps: (
+      <p>This dialog contains your message or interactive content.</p>
+    ),
+    footerProps: {
       buttons: [
-        { label: 'Cancel', onClick: () => setShowDialog(false) },
-        { label: 'Save', onClick: () => alert('Saved!') }
+        { label: 'Cancel', onClick: () => setShowCustomDialog(false) },
+        { label: 'Save', onClick: () => alert('Saved!') },
       ],
-      info: 'Please review your input before saving.'
-    }
+      info: 'Please review your input before saving.',
+    },
+    closeOnOutsideClick: true,
+    onClose: () => setShowCustomDialog(false),
+  };
+
+  const externalDialogProps = {
+    headerProps: {
+      icon: '📢',
+      title: 'System Alert from External Library',
+      buttons: [
+        { label: 'Help', onClick: () => alert('Help Clicked') },
+        { label: 'Info', onClick: () => alert('Info Clicked') },
+        { label: 'Close', onClick: () => setShowExternalDialog(false) },
+      ],
+    },
+    contentProps: (
+      <p>This dialog is powered by the external <code>sachin-dialog-modal</code> package.</p>
+    ),
+    footerProps: {
+      buttons: [
+        { label: 'Cancel', onClick: () => setShowExternalDialog(false) },
+        { label: 'Save', onClick: () => alert('Saved!') },
+      ],
+      info: 'This modal is imported from an external npm library.',
+    },
+    closeOnOutsideClick: true,
+    onClose: () => setShowExternalDialog(false),
   };
 
   return (
     <div className="app-container">
       <header className="hero-section">
-        <h1>IceWarp Dialog Task</h1>
-        <button className="open-dialog-btn" onClick={() => setSachinDialog(true)}>
-          Open Sachin Dialog Modal
-        </button>
-        {sachinDialog && <SachinDialog  {...dialogProps2} />}
-        <p>
-          This task demonstrates the implementation of a modular Dialog Window component in React.
-          It is built using Vite and follows a Lego-style architecture with reusable subcomponents.
+        <h1 className="app-title">Reusable Dialog Modal Demo</h1>
+        <p className="description">
+          This app demonstrates two implementations of a modular, reusable Dialog Modal component in React.
+          <br /><br />
+          <strong>Custom Dialog Modal:</strong> Locally built modal component<br />
+          <strong>External Dialog Modal:</strong> From <code>sachin-dialog-modal</code>
         </p>
-        <button className="open-dialog-btn" onClick={() => setShowDialog(true)}>
-          Open Dialog Example
-        </button>
+
+        <section className="btn-section">
+          <button className="open-dialog-btn" onClick={() => setShowCustomDialog(true)}>
+            Open Custom Dialog Modal
+          </button>
+          <button className="open-dialog-btn" onClick={() => setShowExternalDialog(true)}>
+            Open External Dialog Modal
+          </button>
+        </section>
+
+        <section className="steps">
+          <h2>💡 How to Use the Dialog Modal Library</h2>
+          <ol>
+            <li>Install: <code>npm install sachin-dialog-modal</code></li>
+            <li>Import: <code>import ExternalDialogModal from 'sachin-dialog-modal'</code></li>
+            <li>Pass props for <code>headerProps</code>, <code>contentProps</code>, <code>footerProps</code></li>
+            <li>Render it conditionally: <code>{`{show && <ExternalDialogModal {...props} />}`}</code></li>
+          </ol>
+        </section>
       </header>
 
-      {showDialog && <Dialog {...dialogProps} />}
+      {showCustomDialog && <CustomDialogModal {...customDialogProps} />}
+      {showExternalDialog && <ExternalDialogModal {...externalDialogProps} />}
     </div>
   );
 }
